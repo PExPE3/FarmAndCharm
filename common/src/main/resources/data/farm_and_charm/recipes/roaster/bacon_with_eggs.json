@@ -1,25 +1,37 @@
 {
   "type": "farm_and_charm:roaster",
-  "ingredients": [
+  "sequences": [
     {
-      "item": "farm_and_charm:bacon"
+      "ingredients": [
+        {
+          "item": "farm_and_charm:butter"
+        }
+      ],
+      "duration": 200
     },
     {
-      "item": "farm_and_charm:bacon"
+      "ingredients": [
+        {
+          "item": "farm_and_charm:bacon"
+        },
+        {
+          "item": "farm_and_charm:bacon"
+        }
+      ],
+      "duration": 600
     },
     {
-      "item": "minecraft:egg"
-    },
-    {
-      "item": "minecraft:egg"
-    },
-    {
-      "tag": "farm_and_charm:butter"
+      "ingredients": [
+        {
+          "item": "minecraft:egg"
+        },
+        {
+          "item": "minecraft:egg"
+        }
+      ],
+      "duration": 600
     }
   ],
-  "container": {
-    "item": "minecraft:bowl"
-  },
   "result": {
     "item": "farm_and_charm:bacon_with_eggs",
     "count": 3

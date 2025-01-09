@@ -31,13 +31,13 @@ public class RoasterCategory implements IRecipeCategory<RoasterRecipe> {
     public static final int HEIGHT_OF = 13;
     private final IDrawable background;
     private final IDrawable icon;
-    private final IDrawableAnimated arrow;
+    //private final IDrawableAnimated arrow;
     private final Component localizedName;
 
     public RoasterCategory(IGuiHelper helper) {
         this.background = helper.createDrawable(RoasterGui.BACKGROUND, WIDTH_OF, HEIGHT_OF, WIDTH, HEIGHT);
-        this.arrow = helper.drawableBuilder(RoasterGui.BACKGROUND, 178, 15, 18, 30)
-                .buildAnimated(RoasterBlockEntity.getMaxRoastingTime(), IDrawableAnimated.StartDirection.LEFT, false);
+        //this.arrow = helper.drawableBuilder(RoasterGui.BACKGROUND, 178, 15, 18, 30)
+               // .buildAnimated(RoasterBlockEntity.getMaxRoastingTime(), IDrawableAnimated.StartDirection.LEFT, false);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, ObjectRegistry.ROASTER.get().asItem().getDefaultInstance());
         this.localizedName = Component.translatable("rei.farm_and_charm.roaster_category");
     }
@@ -48,7 +48,7 @@ public class RoasterCategory implements IRecipeCategory<RoasterRecipe> {
         NonNullList<Ingredient> ingredients = recipe.getIngredients();
         int s = ingredients.size();
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 95 - WIDTH_OF, 55 - HEIGHT_OF).addItemStack(recipe.getContainer());
+     //   builder.addSlot(RecipeIngredientRole.INPUT, 95 - WIDTH_OF, 55 - HEIGHT_OF).addItemStack(recipe.getContainer());
 
         for (int row = 0; row < 2; row++) {
             for (int slot = 0; slot < 3; slot++) {
@@ -64,7 +64,7 @@ public class RoasterCategory implements IRecipeCategory<RoasterRecipe> {
 
     @Override
     public void draw(RoasterRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        arrow.draw(guiGraphics, RoasterGui.ARROW_X - WIDTH_OF, RoasterGui.ARROW_Y - HEIGHT_OF);
+      //  arrow.draw(guiGraphics, RoasterGui.ARROW_X - WIDTH_OF, RoasterGui.ARROW_Y - HEIGHT_OF);
     }
 
     @Override

@@ -200,7 +200,6 @@ public abstract class AbstractTowableEntity extends Entity {
     }
 
     private void addStats() {
-        // Implementiere hier deine Logik zur Statistikerfassung, falls nötig
     }
 
     void tickLerp() {

@@ -37,6 +37,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.farm_and_charm.core.block.entity.RoasterBlockEntity;
+import net.satisfy.farm_and_charm.core.registry.EntityTypeRegistry;
 import net.satisfy.farm_and_charm.core.registry.SoundEventRegistry;
 import net.satisfy.farm_and_charm.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
@@ -185,7 +186,7 @@ public class RoasterBlock extends BaseEntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-        if (!world.isClientSide) {
+        if (!world.isClientSide && type == EntityTypeRegistry.ROASTER_BLOCK_ENTITY.get()) {
             return (lvl, pos, blkState, t) -> {
                 if (t instanceof RoasterBlockEntity roastingPot) {
                     roastingPot.tick(lvl, pos, blkState, roastingPot);

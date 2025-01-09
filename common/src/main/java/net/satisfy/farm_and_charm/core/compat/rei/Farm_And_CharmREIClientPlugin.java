@@ -46,7 +46,7 @@ public class Farm_And_CharmREIClientPlugin {
         registry.registerFiller(MincerRecipe.class, MincingDisplay::new);
         registry.registerFiller(StoveRecipe.class, StoveDisplay::new);
         registry.registerFiller(CraftingBowlRecipe.class, CraftingBowlDisplay::new);
-        registry.registerFiller(RoasterRecipe.class, RoasterDisplay::new);
+        //registry.registerFiller(RoasterRecipe.class, RoasterDisplay::new);
         registry.registerFiller(SiloRecipe.class, SiloDisplay::new);
 
     }

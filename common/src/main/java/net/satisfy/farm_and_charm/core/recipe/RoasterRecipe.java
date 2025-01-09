@@ -1,42 +1,45 @@
 package net.satisfy.farm_and_charm.core.recipe;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.Container;
 import net.minecraft.world.level.Level;
 import net.satisfy.farm_and_charm.core.registry.RecipeTypeRegistry;
 import net.satisfy.farm_and_charm.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class RoasterRecipe implements Recipe<Container> {
+import java.util.ArrayList;
+import java.util.List;
 
-    final ResourceLocation id;
-    private final NonNullList<Ingredient> inputs;
-    private final ItemStack container;
+public class RoasterRecipe implements Recipe<Container> {
+    private final ResourceLocation id;
+    private final List<Sequence> sequences;
     private final ItemStack output;
 
-    public RoasterRecipe(ResourceLocation id, NonNullList<Ingredient> inputs, ItemStack container, ItemStack output) {
+    public RoasterRecipe(ResourceLocation id, List<Sequence> sequences, ItemStack output) {
         this.id = id;
-        this.inputs = inputs;
-        this.container = container;
+        this.sequences = sequences;
         this.output = output;
     }
 
     @Override
     public boolean matches(Container inventory, Level world) {
-        return GeneralUtil.matchesRecipe(inventory, inputs, 0, 6);
+        if (sequences.isEmpty()) return false;
+        Sequence firstSequence = sequences.get(0);
+        return GeneralUtil.matchesIngredients(inventory, firstSequence.getIngredients(), 0, 6);
     }
 
     @Override
     public @NotNull ItemStack assemble(Container container, RegistryAccess registryAccess) {
-        return ItemStack.EMPTY;
+        return getResultItem(registryAccess).copy();
     }
 
     @Override
@@ -66,46 +69,62 @@ public class RoasterRecipe implements Recipe<Container> {
 
     @Override
     public @NotNull NonNullList<Ingredient> getIngredients() {
-        return this.inputs;
+        NonNullList<Ingredient> allIngredients = NonNullList.create();
+        for (Sequence seq : sequences) {
+            allIngredients.addAll(seq.getIngredients());
+        }
+        return allIngredients;
     }
 
-    public ItemStack getContainer() {
-        return container;
-    }
-
-    @Override
-    public boolean isSpecial() {
-        return true;
+    public List<Sequence> getSequences() {
+        return sequences;
     }
 
     public static class Serializer implements RecipeSerializer<RoasterRecipe> {
+        public static final Serializer INSTANCE = new Serializer();
 
         @Override
         public @NotNull RoasterRecipe fromJson(ResourceLocation id, JsonObject json) {
-            final var ingredients = GeneralUtil.deserializeIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
-            if (ingredients.isEmpty()) {
-                throw new JsonParseException("No ingredients for Roaster Recipe");
-            } else if (ingredients.size() > 6) {
-                throw new JsonParseException("Too many ingredients for Roaster Recipe");
-            } else {
-                return new RoasterRecipe(id, ingredients, ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "container")), ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result")));
+            JsonArray sequencesJson = GsonHelper.getAsJsonArray(json, "sequences");
+            List<Sequence> sequences = new ArrayList<>();
+            for (var element : sequencesJson) {
+                sequences.add(Sequence.fromJson(element.getAsJsonObject()));
             }
+            if (sequences.isEmpty()) {
+                throw new JsonParseException("No sequences for Roaster Recipe");
+            }
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            return new RoasterRecipe(id, sequences, result);
         }
 
         @Override
         public @NotNull RoasterRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            final var ingredients = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-            return new RoasterRecipe(id, ingredients, buf.readItem(), buf.readItem());
+            int sequenceCount = buf.readVarInt();
+            List<Sequence> sequences = new ArrayList<>();
+            for (int i = 0; i < sequenceCount; i++) {
+                int ingredientCount = buf.readVarInt();
+                List<Ingredient> ingredients = new ArrayList<>();
+                for (int j = 0; j < ingredientCount; j++) {
+                    ingredients.add(Ingredient.fromNetwork(buf));
+                }
+                int duration = buf.readVarInt();
+                sequences.add(new Sequence(ingredients, duration));
+            }
+            ItemStack output = buf.readItem();
+            return new RoasterRecipe(id, sequences, output);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, RoasterRecipe recipe) {
-            buf.writeVarInt(recipe.inputs.size());
-            recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.getContainer());
+            buf.writeVarInt(recipe.sequences.size());
+            for (Sequence seq : recipe.sequences) {
+                buf.writeVarInt(seq.getIngredients().size());
+                for (Ingredient ing : seq.getIngredients()) {
+                    ing.toNetwork(buf);
+                }
+                buf.writeVarInt(seq.getDuration());
+            }
             buf.writeItem(recipe.output);
         }
     }
-
 }

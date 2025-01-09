@@ -22,19 +22,13 @@ public class RoasterDisplay extends BasicDisplay {
     public static final CategoryIdentifier<RoasterDisplay> ROASTER_DISPLAY = CategoryIdentifier.of(FarmAndCharm.MOD_ID, "roaster_display");
 
 
-    public RoasterDisplay(Recipe<Container> recipe) {
-        this(EntryIngredients.ofIngredients(Farm_And_CharmREIClientPlugin.ingredients(recipe, getContainer(recipe))), Collections.singletonList(EntryIngredients.of(recipe.getResultItem(BasicDisplay.registryAccess()))), Optional.ofNullable(recipe.getId()));
-    }
+
 
     public RoasterDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<ResourceLocation> location) {
         super(inputs, outputs, location);
     }
 
-    public static ItemStack getContainer(Recipe<Container> recipe) {
-        if (recipe instanceof RoasterRecipe c) {
-            return c.getContainer();
-        } else return ItemStack.EMPTY;
-    }
+
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {

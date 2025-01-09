@@ -7,10 +7,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.satisfy.farm_and_charm.core.block.entity.RoasterBlockEntity;
-import net.satisfy.farm_and_charm.client.gui.handler.slot.ExtendedSlot;
+import net.satisfy.farm_and_charm.core.recipe.Sequence;
 import net.satisfy.farm_and_charm.core.recipe.RoasterRecipe;
 import net.satisfy.farm_and_charm.core.registry.ScreenhandlerTypeRegistry;
 import net.satisfy.farm_and_charm.core.registry.TagRegistry;
@@ -19,29 +17,24 @@ public class RoasterGuiHandler extends AbstractRecipeBookGUIScreenHandler {
     private final ContainerData propertyDelegate;
 
     public RoasterGuiHandler(int syncId, Inventory playerInventory) {
-        this(syncId, playerInventory, new SimpleContainer(8), new SimpleContainerData(2));
+        this(syncId, playerInventory, new SimpleContainer(8), new SimpleContainerData(13));
     }
 
     public RoasterGuiHandler(int syncId, Inventory playerInventory, Container inventory, ContainerData propertyDelegate) {
         super(ScreenhandlerTypeRegistry.ROASTER_SCREEN_HANDLER.get(), syncId, 7, playerInventory, inventory, propertyDelegate);
-
         this.buildBlockEntityContainer(inventory);
         this.buildPlayerContainer(playerInventory);
-
         this.propertyDelegate = propertyDelegate;
         this.addDataSlots(propertyDelegate);
     }
 
     private void buildBlockEntityContainer(Container inventory) {
-        this.addSlot(new ExtendedSlot(inventory, 6, 95, 55, stack -> stack.is(TagRegistry.CONTAINER)));
-
         for (int row = 0; row < 2; row++) {
             for (int slot = 0; slot < 3; slot++) {
-                this.addSlot(new Slot(inventory, slot + row + (row * 2), 30 + (slot * 18), 17 + (row * 18)));
+                this.addSlot(new Slot(inventory, slot + row * 3, 16 + (slot * 18), 36 + (row * 18)));
             }
         }
-
-        this.addSlot(new Slot(inventory, 7, 124, 28) {
+        this.addSlot(new Slot(inventory, 7, 124, 18) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;
@@ -50,13 +43,12 @@ public class RoasterGuiHandler extends AbstractRecipeBookGUIScreenHandler {
     }
 
     private void buildPlayerContainer(Inventory playerInventory) {
-        int i;
-        for (i = 0; i < 3; ++i) {
+        for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
-        for (i = 0; i < 9; ++i) {
+        for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
     }
@@ -65,35 +57,68 @@ public class RoasterGuiHandler extends AbstractRecipeBookGUIScreenHandler {
         return this.propertyDelegate.get(1) != 0;
     }
 
-    public int getScaledProgress(int arrowWidth) {
-        final int progress = this.propertyDelegate.get(0);
-        final int totalProgress = RoasterBlockEntity.getMaxRoastingTime();
-        if (progress == 0) {
-            return 0;
-        }
-        return progress * arrowWidth / totalProgress + 1;
+    public int getSequence1Progress() {
+        return this.propertyDelegate.get(7);
+    }
+
+    public int getSequence1Duration() {
+        return this.propertyDelegate.get(8);
+    }
+
+    public int getSequence2Progress() {
+        return this.propertyDelegate.get(9);
+    }
+
+    public int getSequence2Duration() {
+        return this.propertyDelegate.get(10);
+    }
+
+    public int getSequence3Progress() {
+        return this.propertyDelegate.get(11);
+    }
+
+    public int getSequence3Duration() {
+        return this.propertyDelegate.get(12);
+    }
+
+    public int getTotalProgress() {
+        return this.propertyDelegate.get(6);
+    }
+
+    public int getTotalDuration() {
+        return this.propertyDelegate.get(5);
+    }
+
+    public int getScaledProgress(int progress, int maxWidth) {
+        if (getTotalDuration() == 0) return 0;
+        return progress * maxWidth / getTotalDuration();
     }
 
     @Override
     public boolean hasIngredient(Recipe<?> recipe) {
         if (recipe instanceof RoasterRecipe roasterRecipe) {
-            for (Ingredient ingredient : roasterRecipe.getIngredients()) {
-                boolean found = false;
-                for (Slot slot : this.slots) {
-                    if (ingredient.test(slot.getItem())) {
-                        found = true;
+            for (Sequence sequence : roasterRecipe.getSequences()) {
+                for (net.minecraft.world.item.crafting.Ingredient ingredient : sequence.getIngredients()) {
+                    boolean found = false;
+                    for (Slot slot : this.slots) {
+                        if (ingredient.test(slot.getItem())) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        return false;
                     }
                 }
-                if (!found) {
-                    return false;
-                }
             }
-            ItemStack container = roasterRecipe.getContainer();
+            boolean hasContainer = false;
             for (Slot slot : this.slots) {
-                if (container.getItem() == slot.getItem().getItem()) {
-                    return true;
+                if (slot.getItem().is(TagRegistry.CONTAINER)) {
+                    hasContainer = true;
+                    break;
                 }
             }
+            return hasContainer;
         }
         return false;
     }

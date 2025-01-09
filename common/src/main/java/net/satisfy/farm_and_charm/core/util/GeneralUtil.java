@@ -112,19 +112,6 @@ public class GeneralUtil {
         return false;
     }
 
-    public static NonNullList<Ingredient> deserializeIngredients(JsonArray json) {
-        NonNullList<Ingredient> ingredients = NonNullList.create();
-
-        for(int i = 0; i < json.size(); ++i) {
-            Ingredient ingredient = Ingredient.fromJson(json.get(i));
-            if (!ingredient.isEmpty()) {
-                ingredients.add(ingredient);
-            }
-        }
-
-        return ingredients;
-    }
-
     public static VoxelShape rotateShape(Direction from, Direction to, VoxelShape shape) {
         VoxelShape[] buffer = new VoxelShape[]{shape, Shapes.empty()};
         int times = (to.get2DDataValue() - from.get2DDataValue() + 4) % 4;
@@ -183,7 +170,7 @@ public class GeneralUtil {
         } else {
             if (entity instanceof Player) {
                 Player player = (Player)entity;
-                if (!((Player)entity).getAbilities().instabuild) {
+                if (!player.getAbilities().instabuild) {
                     ItemStack itemStack2 = new ItemStack(returnItem);
                     if (!player.getInventory().add(itemStack2)) {
                         player.drop(itemStack2, false);
@@ -378,7 +365,6 @@ public class GeneralUtil {
             itemEntity.setDefaultPickUpDelay();
             level.addFreshEntity(itemEntity);
         }
-
     }
 
     public static void putBlockPos(CompoundTag compoundTag, BlockPos blockPos) {
@@ -449,5 +435,33 @@ public class GeneralUtil {
         public FoodComponent(List<Pair<MobEffectInstance, Float>> statusEffects) {
             super(1, 0.0F, false, true, false, statusEffects);
         }
+    }
+
+    public static boolean matchesIngredients(Container inventory, List<Ingredient> ingredients, int startSlot, int slotCount) {
+        for (Ingredient ingredient : ingredients) {
+            boolean found = false;
+            for (int slot = startSlot; slot < startSlot + slotCount; slot++) {
+                ItemStack stack = inventory.getItem(slot);
+                if (ingredient.test(stack)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static NonNullList<Ingredient> deserializeIngredients(JsonArray json) {
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        for(int i = 0; i < json.size(); ++i) {
+            Ingredient ingredient = Ingredient.fromJson(json.get(i));
+            if (!ingredient.isEmpty()) {
+                ingredients.add(ingredient);
+            }
+        }
+        return ingredients;
     }
 }
