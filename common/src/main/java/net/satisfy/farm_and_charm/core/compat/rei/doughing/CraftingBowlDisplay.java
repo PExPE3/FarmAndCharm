@@ -5,6 +5,7 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.satisfy.farm_and_charm.core.recipe.CraftingBowlRecipe;
 
 import java.util.ArrayList;
@@ -14,8 +15,12 @@ import java.util.Optional;
 
 @SuppressWarnings("all")
 public class CraftingBowlDisplay extends BasicDisplay {
-    public CraftingBowlDisplay(CraftingBowlRecipe recipe) {
-        super(EntryIngredients.ofIngredients(recipe.getIngredients()), Collections.singletonList(EntryIngredients.of(recipe.getResultItem(BasicDisplay.registryAccess()))));
+    public CraftingBowlDisplay(RecipeHolder<CraftingBowlRecipe> recipe) {
+        super(EntryIngredients.ofIngredients(
+                recipe.value().getIngredients()
+        ), Collections.singletonList(EntryIngredients.of(
+                recipe.value().getResultItem(BasicDisplay.registryAccess())
+        )), Optional.of(recipe.id()));
     }
 
     public CraftingBowlDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<ResourceLocation> location) {

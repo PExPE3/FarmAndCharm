@@ -24,8 +24,8 @@ public class CookingPotDisplay extends BasicDisplay {
 
     public static final CategoryIdentifier<CookingPotDisplay> COOKING_POT_DISPLAY = CategoryIdentifier.of(FarmAndCharm.MOD_ID, "cooking_pot_display");
 
-    public CookingPotDisplay(CookingPotRecipe recipe) {
-        super(createInputs(recipe), createOutputs(recipe));
+    public CookingPotDisplay(RecipeHolder<CookingPotRecipe> recipe) {
+        super(createInputs(recipe.value()), createOutputs(recipe.value()), Optional.of(recipe.id()));
     }
 
     private static List<EntryIngredient> createInputs(Recipe<RecipeInput> recipe) {

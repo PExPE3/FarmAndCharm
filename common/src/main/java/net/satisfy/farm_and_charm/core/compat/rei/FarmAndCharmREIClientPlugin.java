@@ -43,13 +43,12 @@ public class FarmAndCharmREIClientPlugin {
     }
 
     public static void registerDisplays(DisplayRegistry registry) {
-        registry.registerFiller(CookingPotRecipe.class, CookingPotDisplay::new);
-        registry.registerFiller(MincerRecipe.class, MincingDisplay::new);
-        registry.registerFiller(StoveRecipe.class, StoveDisplay::new);
-        registry.registerFiller(CraftingBowlRecipe.class, CraftingBowlDisplay::new);
-        registry.registerFiller(RoasterRecipe.class, RoasterDisplay::new);
-        registry.registerFiller(SiloRecipe.class, SiloDisplay::new);
-
+        registry.registerRecipeFiller(CookingPotRecipe.class, RecipeTypeRegistry.COOKING_POT_RECIPE_TYPE.get(), CookingPotDisplay::new);
+        registry.registerRecipeFiller(MincerRecipe.class, RecipeTypeRegistry.MINCER_RECIPE_TYPE.get(), MincingDisplay::new);
+        registry.registerRecipeFiller(StoveRecipe.class, RecipeTypeRegistry.STOVE_RECIPE_TYPE.get(), StoveDisplay::new);
+        registry.registerRecipeFiller(CraftingBowlRecipe.class, RecipeTypeRegistry.CRAFTING_BOWL_RECIPE_TYPE.get(), CraftingBowlDisplay::new);
+        registry.registerRecipeFiller(RoasterRecipe.class, RecipeTypeRegistry.ROASTER_RECIPE_TYPE.get(), RoasterDisplay::new);
+        registry.registerRecipeFiller(SiloRecipe.class, RecipeTypeRegistry.SILO_RECIPE_TYPE.get(), SiloDisplay::new);
     }
 
     public static List<Ingredient> ingredients(Recipe<RecipeInput> recipe, ItemStack stack) {

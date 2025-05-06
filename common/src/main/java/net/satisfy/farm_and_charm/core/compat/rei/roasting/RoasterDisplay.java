@@ -23,12 +23,12 @@ public class RoasterDisplay extends BasicDisplay {
     public static final CategoryIdentifier<RoasterDisplay> ROASTER_DISPLAY = CategoryIdentifier.of(FarmAndCharm.MOD_ID, "roaster_display");
 
 
-    public RoasterDisplay(RoasterRecipe recipe) {
+    public RoasterDisplay(RecipeHolder<RoasterRecipe> recipe) {
         this(EntryIngredients.ofIngredients(
-                FarmAndCharmREIClientPlugin.ingredients(recipe, getContainer(recipe))
+                FarmAndCharmREIClientPlugin.ingredients(recipe.value(), getContainer(recipe.value()))
         ), Collections.singletonList(
-                EntryIngredients.of(recipe.getResultItem(registryAccess()))
-        ), Optional.empty());
+                EntryIngredients.of(recipe.value().getResultItem(registryAccess()))
+        ), Optional.of(recipe.id()));
     }
 
     public RoasterDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<ResourceLocation> id) {

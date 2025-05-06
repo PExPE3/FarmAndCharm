@@ -3,19 +3,22 @@ package net.satisfy.farm_and_charm.core.compat.rei.mincing;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.core.recipe.MincerRecipe;
 
 import java.util.Collections;
+import java.util.Optional;
 
 public class MincingDisplay extends BasicDisplay {
     public static final CategoryIdentifier<MincingDisplay> MINCING_DISPLAY = CategoryIdentifier.of(FarmAndCharm.MOD_ID, "mincing_display");
 
-    public MincingDisplay(MincerRecipe recipe) {
-        super(
-                Collections.singletonList(EntryIngredients.ofIngredient(recipe.getInput())),
-                Collections.singletonList(EntryIngredients.of(recipe.getOutput()))
-        );
+    public MincingDisplay(RecipeHolder<MincerRecipe> recipe) {
+        super(Collections.singletonList(
+                EntryIngredients.ofIngredient(recipe.value().getInput())
+        ), Collections.singletonList(
+                EntryIngredients.of(recipe.value().getOutput())
+        ), Optional.of(recipe.id()));
     }
 
     @Override
