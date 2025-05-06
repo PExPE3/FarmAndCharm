@@ -14,7 +14,7 @@
   "container": {
     "required": true,
     "item": {
-      "item": "minecraft:glass_bottle"
+      "id": "minecraft:glass_bottle"
     }
   },
   "result": {

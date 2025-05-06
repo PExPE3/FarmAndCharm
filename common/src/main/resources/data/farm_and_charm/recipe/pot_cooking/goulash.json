@@ -20,7 +20,7 @@
   "container": {
     "required": false,
     "item": {
-      "item": "minecraft:bowl"
+      "id": "minecraft:bowl"
     }
   },
   "result": {

@@ -15,7 +15,7 @@
     }
   ],
   "container": {
-    "item": "minecraft:bowl"
+    "id": "minecraft:bowl"
   },
   "result": {
     "id": "farm_and_charm:chicken_wrapped_in_bacon",

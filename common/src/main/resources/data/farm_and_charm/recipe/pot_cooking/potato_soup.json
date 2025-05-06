@@ -11,7 +11,7 @@
   "container": {
     "required": true,
     "item": {
-      "item": "minecraft:bowl"
+      "id": "minecraft:bowl"
     }
   },
   "result": {

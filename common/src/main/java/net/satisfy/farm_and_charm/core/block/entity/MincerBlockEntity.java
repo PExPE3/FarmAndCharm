@@ -189,7 +189,7 @@ public class MincerBlockEntity extends RandomizableContainerBlockEntity implemen
                 if (cranked >= MincerBlock.CRANKS_NEEDED) {
                     cranked = 0;
 
-                    RecipeInput recipeInput = CraftingInput.of(1, 1, mincer.getItems().subList(INPUT_SLOT, INPUT_SLOT));
+                    RecipeInput recipeInput = CraftingInput.of(1, 1, mincer.getItems());
                     Optional<RecipeHolder<MincerRecipe>> recipeHolder = level.getRecipeManager().getRecipeFor(RecipeTypeRegistry.MINCER_RECIPE_TYPE.get(), recipeInput, level);
                     if (recipeHolder.isPresent()) {
                         MincerRecipe recipe = recipeHolder.get().value();

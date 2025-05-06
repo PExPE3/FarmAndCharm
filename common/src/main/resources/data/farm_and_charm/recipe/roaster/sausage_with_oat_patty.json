@@ -21,7 +21,7 @@
     }
   ],
   "container": {
-    "item": "minecraft:bowl"
+    "id": "minecraft:bowl"
   },
   "result": {
     "id": "farm_and_charm:sausage_with_oat_patty",
