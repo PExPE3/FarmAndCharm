@@ -39,11 +39,11 @@ public class StoveGuiHandler extends AbstractContainerMenu {
     }
 
     private void buildBlockEntityContainer(Inventory playerInventory) {
-        this.addSlot(new StoveOutputSlot(playerInventory.player, inventory, 0, 124, 28));
-        this.addSlot(new ExtendedSlot(inventory, 1, 30, 17));
-        this.addSlot(new ExtendedSlot(inventory, 2, 48, 17));
-        this.addSlot(new ExtendedSlot(inventory, 3, 66, 17));
-        this.addSlot(new ExtendedSlot(inventory, 4, 42 + 53, 48 + 7, StoveGuiHandler::isFuel));
+        this.addSlot(new StoveOutputSlot(playerInventory.player, inventory, 0, 126, 42));
+        this.addSlot(new ExtendedSlot(inventory, 1, 29, 18));
+        this.addSlot(new ExtendedSlot(inventory, 2, 47, 18));
+        this.addSlot(new ExtendedSlot(inventory, 3, 65, 18));
+        this.addSlot(new ExtendedSlot(inventory, 4, 42, 48, StoveGuiHandler::isFuel));
     }
 
     private void buildPlayerContainer(Inventory playerInventory) {

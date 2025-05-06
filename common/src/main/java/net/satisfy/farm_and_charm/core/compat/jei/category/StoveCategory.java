@@ -69,6 +69,7 @@ public class StoveCategory implements IRecipeCategory<StoveRecipe> {
 
     @Override
     public void draw(StoveRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics);
         arrow.draw(guiGraphics, StoveGui.ARROW_X - WIDTH_OF, StoveGui.ARROW_Y - HEIGHT_OF);
         burnIcon.draw(guiGraphics, 62 - WIDTH_OF, 49 - HEIGHT_OF);
 
@@ -100,4 +101,10 @@ public class StoveCategory implements IRecipeCategory<StoveRecipe> {
     public @NotNull IDrawable getIcon() {
         return this.icon;
     }
+
+    @Override
+    public int getWidth() { return WIDTH; }
+
+    @Override
+    public int getHeight() { return HEIGHT; }
 }

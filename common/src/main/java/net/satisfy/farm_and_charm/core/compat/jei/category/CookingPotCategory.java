@@ -67,6 +67,7 @@ public class CookingPotCategory implements IRecipeCategory<CookingPotRecipe> {
 
     @Override
     public void draw(CookingPotRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics);
         arrow.draw(guiGraphics, CookingPotGui.ARROW_X - WIDTH_OF, CookingPotGui.ARROW_Y - HEIGHT_OF);
     }
 
@@ -80,10 +81,11 @@ public class CookingPotCategory implements IRecipeCategory<CookingPotRecipe> {
         return this.localizedName;
     }
 
-    /*@Override
-    public @NotNull IDrawable getBackground() {
-        return this.background;
-    }*/
+    @Override
+    public int getWidth() { return WIDTH; }
+
+    @Override
+    public int getHeight() { return HEIGHT; }
 
     @Override
     public @NotNull IDrawable getIcon() {

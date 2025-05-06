@@ -29,7 +29,7 @@ public class StoveGui extends AbstractContainerScreen<StoveGuiHandler> {
     }
 
     static {
-        BACKGROUND = FarmAndCharmIdentifier.of("textures/gui/pot_gui.png");
+        BACKGROUND = FarmAndCharmIdentifier.of("textures/gui/stove_gui.png");
     }
 
     @Override
@@ -41,12 +41,12 @@ public class StoveGui extends AbstractContainerScreen<StoveGuiHandler> {
 
     public void renderProgressArrow(GuiGraphics guiGraphics) {
         int progress = this.menu.getScaledProgress(18);
-        guiGraphics.blit(BACKGROUND, leftPos + 95, topPos + 19, 178, 20, progress, 25);
+        guiGraphics.blit(BACKGROUND, leftPos + 93, topPos + 32, 178, 20, progress, 25);
     }
 
     public void renderBurnIcon(GuiGraphics guiGraphics, int posX, int posY) {
         if (this.menu.isBeingBurned()) {
-            guiGraphics.blit(BACKGROUND, posX + 124, posY + 55, 176, 0, 17, 15);
+            guiGraphics.blit(BACKGROUND, posX + 62, posY + 49, 176, 0, 17, 15);
         }
     }
 

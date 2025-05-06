@@ -64,6 +64,7 @@ public class RoasterCategory implements IRecipeCategory<RoasterRecipe> {
 
     @Override
     public void draw(RoasterRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        background.draw(guiGraphics);
         arrow.draw(guiGraphics, RoasterGui.ARROW_X - WIDTH_OF, RoasterGui.ARROW_Y - HEIGHT_OF);
     }
 
@@ -78,9 +79,10 @@ public class RoasterCategory implements IRecipeCategory<RoasterRecipe> {
     }
 
     @Override
-    public @NotNull IDrawable getBackground() {
-        return this.background;
-    }
+    public int getWidth() { return WIDTH; }
+
+    @Override
+    public int getHeight() { return HEIGHT; }
 
     @Override
     public @NotNull IDrawable getIcon() {
