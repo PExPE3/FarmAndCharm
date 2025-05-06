@@ -43,6 +43,18 @@ allprojects {
         }
     }
 
+    publishing {
+        repositories {
+            maven {
+                url = uri("https://maven.tsuyumori.dev/snapshots/")
+                credentials {
+                    username = findProperty("maven_user") || System.getenv("MVN_NAME")
+                    password = findProperty("maven_password") || System.getenv("MVN_PASS")
+                }
+            }
+        }
+    }
+
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
         options.release = 21

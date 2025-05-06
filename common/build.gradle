@@ -22,10 +22,8 @@ publishing {
     publications {
         mavenCommon(MavenPublication) {
             artifactId = rootProject.archives_base_name
+            version += "-" + project.name
             from components.java
         }
-    }
-
-    repositories {
     }
 }
