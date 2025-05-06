@@ -228,7 +228,7 @@ public class CookingPotBlockEntity extends BlockEntity implements BlockEntityTic
             return;
         }
 
-        RecipeInput recipeInput = CraftingInput.of(3, 2, blockEntity.getItems().subList(0, 6));
+        RecipeInput recipeInput = CraftingInput.of(3, 2, blockEntity.getItems());
         Optional<RecipeHolder<CookingPotRecipe>> recipeHolder = world.getRecipeManager().getRecipeFor(
                 RecipeTypeRegistry.COOKING_POT_RECIPE_TYPE.get(), recipeInput, level
         );

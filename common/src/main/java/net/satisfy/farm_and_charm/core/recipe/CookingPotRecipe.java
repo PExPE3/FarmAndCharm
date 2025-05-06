@@ -101,7 +101,7 @@ public class CookingPotRecipe implements Recipe<RecipeInput> {
 
     public static class Serializer implements RecipeSerializer<CookingPotRecipe> {
         public PairMapCodec<Boolean, ItemStack> containerCodec = new PairMapCodec<>(
-                Codec.BOOL.fieldOf("required"), ItemStack.CODEC.fieldOf("result")
+                Codec.BOOL.fieldOf("required"), ItemStack.CODEC.fieldOf("item")
         );
 
         @Override
@@ -113,7 +113,7 @@ public class CookingPotRecipe implements Recipe<RecipeInput> {
                         return DataResult.success(list);
                     }).forGetter(CookingPotRecipe::getIngredients),
                     containerCodec.fieldOf("container").forGetter(CookingPotRecipe::getContainer),
-                    ItemStack.CODEC.fieldOf("output").forGetter(CookingPotRecipe::getOutput),
+                    ItemStack.CODEC.fieldOf("result").forGetter(CookingPotRecipe::getOutput),
                     Codec.BOOL.fieldOf("requiresLearning").orElse(false).forGetter(CookingPotRecipe::requiresLearning)
             ).apply(obj, CookingPotRecipe::new));
         }

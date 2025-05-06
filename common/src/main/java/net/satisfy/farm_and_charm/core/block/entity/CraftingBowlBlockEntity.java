@@ -157,7 +157,7 @@ public class CraftingBowlBlockEntity extends RandomizableContainerBlockEntity im
             int stirred = blockState.getValue(CraftingBowlBlock.STIRRED);
 
             if (stirring > 0) {
-                RecipeInput recipeInput = CraftingInput.of(2, 2, blockEntity.getItems().subList(0, 3));
+                RecipeInput recipeInput = CraftingInput.of(2, 2, blockEntity.getItems());
                 Optional<RecipeHolder<CraftingBowlRecipe>> recipeHolder = level.getRecipeManager()
                         .getRecipeFor(RecipeTypeRegistry.CRAFTING_BOWL_RECIPE_TYPE.get(), recipeInput, level);
                 Optional<CraftingBowlRecipe> recipe = recipeHolder.map(RecipeHolder::value);
