@@ -1,99 +1,100 @@
 package net.satisfy.farm_and_charm.neoforge.config;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.electronwill.nightconfig.core.io.WritingMode;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.*;
+import net.satisfy.farm_and_charm.FarmAndCharm;
 
-import java.io.File;
+@EventBusSubscriber(modid = FarmAndCharm.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+public class FarmAndCharmConfigNeo {
+    public static final ModConfigSpec COMMON_CONFIG;
 
-public class FarmAndCharmForgeConfig {
-    public static final ForgeConfigSpec COMMON_CONFIG;
+    public static final BooleanValue ENABLE_BONEMEAL_EFFECT;
+    public static final IntValue FERTILIZED_SOIL_RANGE;
+    public static final IntValue WATER_SPRINKLER_RANGE;
+    public static final BooleanValue ENABLE_RAIN_GROWTH_EFFECT;
+    public static final DoubleValue RAIN_GROWTH_MULTIPLIER;
+    public static final IntValue FEEDING_TROUGH_RANGE;
 
-    public static final ForgeConfigSpec.BooleanValue ENABLE_BONEMEAL_EFFECT;
-    public static final ForgeConfigSpec.IntValue FERTILIZED_SOIL_RANGE;
-    public static final ForgeConfigSpec.IntValue WATER_SPRINKLER_RANGE;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_RAIN_GROWTH_EFFECT;
-    public static final ForgeConfigSpec.DoubleValue RAIN_GROWTH_MULTIPLIER;
-    public static final ForgeConfigSpec.IntValue FEEDING_TROUGH_RANGE;
+    public static final BooleanValue ENABLE_FERTILIZER;
+    public static final BooleanValue ENABLE_TAMING;
+    public static final BooleanValue ENABLE_HORSE_TAMING;
+    public static final BooleanValue ENABLE_HORSE_EFFECTS;
+    public static final BooleanValue ENABLE_CHICKEN_EFFECTS;
+    public static final BooleanValue ENABLE_CAT_TAMING_CHANCE;
 
-    public static final ForgeConfigSpec.BooleanValue ENABLE_FERTILIZER;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_TAMING;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_HORSE_TAMING;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_HORSE_EFFECTS;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_CHICKEN_EFFECTS;
-    public static final ForgeConfigSpec.BooleanValue ENABLE_CAT_TAMING_CHANCE;
+    public static final IntValue OAT_PANCAKE_NUTRITION;
+    public static final DoubleValue OAT_PANCAKE_SATURATION_MOD;
+    public static final IntValue ROASTED_CORN_NUTRITION;
+    public static final DoubleValue ROASTED_CORN_SATURATION_MOD;
+    public static final IntValue POTATO_WITH_ROAST_MEAT_NUTRITION;
+    public static final DoubleValue POTATO_WITH_ROAST_MEAT_SATURATION_MOD;
+    public static final IntValue BAKED_LAMB_HAM_NUTRITION;
+    public static final DoubleValue BAKED_LAMB_HAM_SATURATION_MOD;
+    public static final IntValue FARMERS_BREAKFAST_NUTRITION;
+    public static final DoubleValue FARMERS_BREAKFAST_SATURATION_MOD;
+    public static final IntValue STUFFED_CHICKEN_NUTRITION;
+    public static final DoubleValue STUFFED_CHICKEN_SATURATION_MOD;
+    public static final IntValue STUFFED_RABBIT_NUTRITION;
+    public static final DoubleValue STUFFED_RABBIT_SATURATION_MOD;
+    public static final IntValue GRANDMOTHERS_STRAWBERRY_CAKE_NUTRITION;
+    public static final DoubleValue GRANDMOTHERS_STRAWBERRY_CAKE_SATURATION_MOD;
+    public static final IntValue FARMERS_BREAD_NUTRITION;
+    public static final DoubleValue FARMERS_BREAD_SATURATION_MOD;
+    public static final IntValue FARMER_SALAD_NUTRITION;
+    public static final DoubleValue FARMER_SALAD_SATURATION_MOD;
+    public static final IntValue GOULASH_NUTRITION;
+    public static final DoubleValue GOULASH_SATURATION_MOD;
+    public static final IntValue SIMPLE_TOMATO_SOUP_NUTRITION;
+    public static final DoubleValue SIMPLE_TOMATO_SOUP_SATURATION_MOD;
+    public static final IntValue BARLEY_SOUP_NUTRITION;
+    public static final DoubleValue BARLEY_SOUP_SATURATION_MOD;
+    public static final IntValue ONION_SOUP_NUTRITION;
+    public static final DoubleValue ONION_SOUP_SATURATION_MOD;
+    public static final IntValue POTATO_SOUP_NUTRITION;
+    public static final DoubleValue POTATO_SOUP_SATURATION_MOD;
+    public static final IntValue PASTA_WITH_ONION_SAUCE_NUTRITION;
+    public static final DoubleValue PASTA_WITH_ONION_SAUCE_SATURATION_MOD;
+    public static final IntValue CORN_GRITS_NUTRITION;
+    public static final DoubleValue CORN_GRITS_SATURATION_MOD;
+    public static final IntValue OATMEAL_WITH_STRAWBERRIES_NUTRITION;
+    public static final DoubleValue OATMEAL_WITH_STRAWBERRIES_SATURATION_MOD;
+    public static final IntValue SAUSAGE_WITH_OAT_PATTY_NUTRITION;
+    public static final DoubleValue SAUSAGE_WITH_OAT_PATTY_SATURATION_MOD;
+    public static final IntValue LAMB_WITH_CORN_NUTRITION;
+    public static final DoubleValue LAMB_WITH_CORN_SATURATION_MOD;
+    public static final IntValue BEEF_PATTY_WITH_VEGETABLES_NUTRITION;
+    public static final DoubleValue BEEF_PATTY_WITH_VEGETABLES_SATURATION_MOD;
+    public static final IntValue BARLEY_PATTIES_WITH_POTATOES_NUTRITION;
+    public static final DoubleValue BARLEY_PATTIES_WITH_POTATOES_SATURATION_MOD;
+    public static final IntValue BACON_WITH_EGGS_NUTRITION;
+    public static final DoubleValue BACON_WITH_EGGS_SATURATION_MOD;
+    public static final IntValue CHICKEN_WRAPPED_IN_BACON_NUTRITION;
+    public static final DoubleValue CHICKEN_WRAPPED_IN_BACON_SATURATION_MOD;
+    public static final IntValue COOKED_SALMON_NUTRITION;
+    public static final DoubleValue COOKED_SALMON_SATURATION_MOD;
+    public static final IntValue COOKED_COD_NUTRITION;
+    public static final DoubleValue COOKED_COD_SATURATION_MOD;
+    public static final IntValue ROASTED_CHICKEN_NUTRITION;
+    public static final DoubleValue ROASTED_CHICKEN_SATURATION_MOD;
 
-    public static final ForgeConfigSpec.IntValue OAT_PANCAKE_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue OAT_PANCAKE_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue ROASTED_CORN_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue ROASTED_CORN_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue POTATO_WITH_ROAST_MEAT_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue POTATO_WITH_ROAST_MEAT_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue BAKED_LAMB_HAM_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue BAKED_LAMB_HAM_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue FARMERS_BREAKFAST_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue FARMERS_BREAKFAST_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue STUFFED_CHICKEN_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue STUFFED_CHICKEN_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue STUFFED_RABBIT_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue STUFFED_RABBIT_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue GRANDMOTHERS_STRAWBERRY_CAKE_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue GRANDMOTHERS_STRAWBERRY_CAKE_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue FARMERS_BREAD_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue FARMERS_BREAD_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue FARMER_SALAD_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue FARMER_SALAD_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue GOULASH_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue GOULASH_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue SIMPLE_TOMATO_SOUP_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue SIMPLE_TOMATO_SOUP_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue BARLEY_SOUP_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue BARLEY_SOUP_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue ONION_SOUP_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue ONION_SOUP_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue POTATO_SOUP_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue POTATO_SOUP_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue PASTA_WITH_ONION_SAUCE_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue PASTA_WITH_ONION_SAUCE_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue CORN_GRITS_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue CORN_GRITS_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue OATMEAL_WITH_STRAWBERRIES_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue OATMEAL_WITH_STRAWBERRIES_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue SAUSAGE_WITH_OAT_PATTY_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue SAUSAGE_WITH_OAT_PATTY_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue LAMB_WITH_CORN_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue LAMB_WITH_CORN_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue BEEF_PATTY_WITH_VEGETABLES_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue BEEF_PATTY_WITH_VEGETABLES_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue BARLEY_PATTIES_WITH_POTATOES_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue BARLEY_PATTIES_WITH_POTATOES_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue BACON_WITH_EGGS_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue BACON_WITH_EGGS_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue CHICKEN_WRAPPED_IN_BACON_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue CHICKEN_WRAPPED_IN_BACON_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue COOKED_SALMON_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue COOKED_SALMON_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue COOKED_COD_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue COOKED_COD_SATURATION_MOD;
-    public static final ForgeConfigSpec.IntValue ROASTED_CHICKEN_NUTRITION;
-    public static final ForgeConfigSpec.DoubleValue ROASTED_CHICKEN_SATURATION_MOD;
-
-    public static final ForgeConfigSpec.IntValue CHICKEN_EFFECT_TICK_INTERVAL;
-    public static final ForgeConfigSpec.IntValue CHICKEN_EFFECT_EGG_CHANCE;
-    public static final ForgeConfigSpec.IntValue CHICKEN_EFFECT_FEATHER_CHANCE;
-    public static final ForgeConfigSpec.IntValue FEAST_EFFECT_SATIATION_INTERVAL;
-    public static final ForgeConfigSpec.IntValue FEAST_EFFECT_SUSTENANCE_INTERVAL;
-    public static final ForgeConfigSpec.IntValue FEAST_EFFECT_HEAL_AMOUNT;
-    public static final ForgeConfigSpec.IntValue SUSTENANCE_EFFECT_INTERVAL;
-    public static final ForgeConfigSpec.IntValue SUSTENANCE_EFFECT_HEAL_AMOUNT;
-    public static final ForgeConfigSpec.IntValue SUSTENANCE_EFFECT_FOOD_INCREMENT;
-    public static final ForgeConfigSpec.IntValue SATIATION_EFFECT_INTERVAL;
-    public static final ForgeConfigSpec.IntValue SATIATION_EFFECT_HEAL_AMOUNT;
+    public static final IntValue CHICKEN_EFFECT_TICK_INTERVAL;
+    public static final IntValue CHICKEN_EFFECT_EGG_CHANCE;
+    public static final IntValue CHICKEN_EFFECT_FEATHER_CHANCE;
+    public static final IntValue FEAST_EFFECT_SATIATION_INTERVAL;
+    public static final IntValue FEAST_EFFECT_SUSTENANCE_INTERVAL;
+    public static final IntValue FEAST_EFFECT_HEAL_AMOUNT;
+    public static final IntValue SUSTENANCE_EFFECT_INTERVAL;
+    public static final IntValue SUSTENANCE_EFFECT_HEAL_AMOUNT;
+    public static final IntValue SUSTENANCE_EFFECT_FOOD_INCREMENT;
+    public static final IntValue SATIATION_EFFECT_INTERVAL;
+    public static final IntValue SATIATION_EFFECT_HEAL_AMOUNT;
 
     static {
-        ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
+        Builder COMMON_BUILDER = new Builder();
 
         COMMON_BUILDER.push("Blocks");
 
@@ -194,22 +195,11 @@ public class FarmAndCharmForgeConfig {
     }
 
     @SubscribeEvent
-    public static void onLoad(final ModConfigEvent.Loading configEvent) {
+    static void onLoad(final ModConfigEvent event) {
+        COMMON_CONFIG.acceptConfig(event.getConfig().getLoadedConfig());
     }
 
-    @SubscribeEvent
-    public static void onReload(final ModConfigEvent.Reloading configEvent) {
-    }
-
-    public static void loadConfig(ForgeConfigSpec spec, String path) {
-        final CommentedFileConfig file = CommentedFileConfig.builder(new File(path))
-                .sync()
-                .preserveInsertionOrder()
-                .autosave()
-                .writingMode(WritingMode.REPLACE)
-                .build();
-        file.load();
-        spec.setConfig(file);
-        file.save();
+    public static <T> T orDefault(ConfigValue<T> val) {
+        return COMMON_CONFIG.isLoaded() ? val.get() : val.getDefault();
     }
 }

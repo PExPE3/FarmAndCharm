@@ -6,7 +6,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "farm_and_charm")
 @Config.Gui.Background("farm_and_charm:textures/block/fertilized_farmland_top.png")
-public class FarmAndCharmFabricConfig implements ConfigData {
+public class FarmAndCharmConfigFabric implements ConfigData {
 
     @ConfigEntry.Gui.CollapsibleObject
     public BlocksSettings blocks = new BlocksSettings();

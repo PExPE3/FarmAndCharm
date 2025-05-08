@@ -6,74 +6,74 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
-import net.satisfy.farm_and_charm.fabric.core.config.FarmAndCharmFabricConfig;
+import net.satisfy.farm_and_charm.fabric.core.config.FarmAndCharmConfigFabric;
 import net.satisfy.farm_and_charm.platform.PlatformHelper;
 
 import java.util.function.Supplier;
 
 public class PlatformHelperImpl extends PlatformHelper {
     public static boolean isBonemealEffectEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.blocks.enableBonemealEffect;
     }
 
     public static int getWaterSprinklerRange() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.blocks.waterSprinklerRange;
     }
 
     public static boolean isRainGrowthEffectEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.blocks.enableRainGrowthEffect;
     }
 
     public static float getRainGrowthMultiplier() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.blocks.rainGrowthMultiplier;
     }
 
     public static int getFeedingTroughRange() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.blocks.feedingTroughRange;
     }
 
     public static int getFertilizedSoilRange() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.blocks.fertilizedSoilRange;
     }
 
     public static boolean isTamingEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.items.enableTaming;
     }
 
     public static boolean isHorseTamingEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.items.enableHorseTaming;
     }
 
     public static boolean isHorseEffectsEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.items.enableHorseEffects;
     }
 
     public static boolean isChickenEffectsEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.items.enableChickenEffects;
     }
 
     public static boolean enableCatTamingChance() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.items.enableCatTamingChance;
     }
 
     public static boolean isFertilizerEnabled() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.items.enableFertilizer;
     }
 
     public static int getNutrition(String itemName) {
-        FarmAndCharmFabricConfig.ItemsSettings items = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig().items;
+        FarmAndCharmConfigFabric.ItemsSettings items = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig().items;
         return switch (itemName) {
             case "oat_pancake" -> items.nutrition.oatPancakeNutrition;
             case "roasted_corn" -> items.nutrition.roastedCornNutrition;
@@ -107,7 +107,7 @@ public class PlatformHelperImpl extends PlatformHelper {
     }
 
     public static float getSaturationMod(String itemName) {
-        FarmAndCharmFabricConfig.ItemsSettings items = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig().items;
+        FarmAndCharmConfigFabric.ItemsSettings items = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig().items;
         return switch (itemName) {
             case "oat_pancake" -> items.nutrition.oatPancakeSaturationMod;
             case "roasted_corn" -> items.nutrition.roastedCornSaturationMod;
@@ -141,57 +141,57 @@ public class PlatformHelperImpl extends PlatformHelper {
     }
 
     public static int getChickenEffectTickInterval() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.chickenEffect.chickenEffectTickInterval;
     }
 
     public static int getChickenEffectEggChance() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.chickenEffect.chickenEffectEggChance;
     }
 
     public static int getChickenEffectFeatherChance() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.chickenEffect.chickenEffectFeatherChance;
     }
 
     public static int getFeastEffectSatiationInterval() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.feastEffect.feastEffectSatiationInterval;
     }
 
     public static int getFeastEffectSustenanceInterval() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.feastEffect.feastEffectSustenanceInterval;
     }
 
     public static int getFeastEffectHealAmount() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.feastEffect.feastEffectHealAmount;
     }
 
     public static int getSustenanceEffectInterval() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.sustenanceEffect.sustenanceEffectInterval;
     }
 
     public static int getSustenanceEffectHealAmount() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.sustenanceEffect.sustenanceEffectHealAmount;
     }
 
     public static int getSustenanceEffectFoodIncrement() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.sustenanceEffect.sustenanceEffectFoodIncrement;
     }
 
     public static int getSatiationEffectInterval() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.satiationEffect.satiationEffectInterval;
     }
 
     public static int getSatiationEffectHealAmount() {
-        FarmAndCharmFabricConfig config = AutoConfig.getConfigHolder(FarmAndCharmFabricConfig.class).getConfig();
+        FarmAndCharmConfigFabric config = AutoConfig.getConfigHolder(FarmAndCharmConfigFabric.class).getConfig();
         return config.effects.satiationEffect.satiationEffectHealAmount;
     }
 

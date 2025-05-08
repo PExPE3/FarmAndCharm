@@ -1,42 +1,48 @@
 package net.satisfy.farm_and_charm.core.registry;
 
-import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.DeferredSupplier;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.core.effect.*;
-import net.satisfy.farm_and_charm.platform.PlatformHelper;
 import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
+import net.satisfy.farm_and_charm.platform.PlatformHelper;
 
 import java.util.function.Supplier;
 
 public class MobEffectRegistry {
 
-    public static final Holder<MobEffect> SWEETS;
-    public static final Holder<MobEffect> HORSE_FODDER;
-    public static final Holder<MobEffect> DOG_FOOD;
-    public static final Holder<MobEffect> CLUCK;
-    public static final Holder<MobEffect> GRANDMAS_BLESSING;
-    public static final Holder<MobEffect> RESTED;
-    public static final Holder<MobEffect> FARMERS_BLESSING;
-    public static final Holder<MobEffect> SUSTENANCE;
-    public static final Holder<MobEffect> SATIATION;
-    public static final Holder<MobEffect> FEAST;
+    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(FarmAndCharm.MOD_ID, Registries.MOB_EFFECT);
 
-    static {
-        SWEETS = PlatformHelper.registerEffect("sweets", SweetsEffect::new);
-        HORSE_FODDER = PlatformHelper.registerEffect("horse_fodder", HorseFodderEffect::new);
-        DOG_FOOD = PlatformHelper.registerEffect("dog_food", DogFoodEffect::new);
-        CLUCK = PlatformHelper.registerEffect("cluck", ChickenEffect::new);
-        GRANDMAS_BLESSING = PlatformHelper.registerEffect("grandmas_blessing", GrandmasBlessingEffect::new);
-        RESTED = PlatformHelper.registerEffect("rested", RestedEffect::new);
-        FARMERS_BLESSING = PlatformHelper.registerEffect("farmers_blessing", FarmersBlessingEffect::new);
-        SUSTENANCE = PlatformHelper.registerEffect("sustenance", SustenanceEffect::new);
-        SATIATION = PlatformHelper.registerEffect("satiation", SatiationEffect::new);
-        FEAST = PlatformHelper.registerEffect("feast", FeastEffect::new);
+    public static final RegistrySupplier<MobEffect> SWEETS = registerEffect("sweets", SweetsEffect::new);
+    public static final RegistrySupplier<MobEffect> HORSE_FODDER = registerEffect("horse_fodder", HorseFodderEffect::new);
+    public static final RegistrySupplier<MobEffect> DOG_FOOD = registerEffect("dog_food", DogFoodEffect::new);
+    public static final RegistrySupplier<MobEffect> CLUCK = registerEffect("cluck", ChickenEffect::new);
+    public static final RegistrySupplier<MobEffect> GRANDMAS_BLESSING = registerEffect("grandmas_blessing", GrandmasBlessingEffect::new);
+    public static final RegistrySupplier<MobEffect> RESTED = registerEffect("rested", RestedEffect::new);
+    public static final RegistrySupplier<MobEffect> FARMERS_BLESSING = registerEffect("farmers_blessing", FarmersBlessingEffect::new);
+    public static final RegistrySupplier<MobEffect> SUSTENANCE = registerEffect("sustenance", SustenanceEffect::new);
+    public static final RegistrySupplier<MobEffect> SATIATION = registerEffect("satiation", SatiationEffect::new);
+    public static final RegistrySupplier<MobEffect> FEAST = registerEffect("feast", FeastEffect::new);
+
+    private static RegistrySupplier<MobEffect> registerEffect(final String path, final Supplier<? extends MobEffect> type) {
+        return MOB_EFFECTS.register(FarmAndCharmIdentifier.of(path), type);
+    }
+
+    public static Holder<MobEffect> getReference(RegistrySupplier<MobEffect> input) {
+        return MOB_EFFECTS.getRegistrar().getHolder(input.getId());
+    }
+
+    public static void init() {
+        MOB_EFFECTS.register();
     }
 }

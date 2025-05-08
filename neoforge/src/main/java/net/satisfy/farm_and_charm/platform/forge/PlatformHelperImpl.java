@@ -1,168 +1,174 @@
 package net.satisfy.farm_and_charm.platform.forge;
 
-import net.satisfy.farm_and_charm.neoforge.config.FarmAndCharmForgeConfig;
+import dev.architectury.registry.registries.DeferredRegister;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.effect.MobEffect;
+import net.satisfy.farm_and_charm.FarmAndCharm;
+import net.satisfy.farm_and_charm.neoforge.config.FarmAndCharmConfigNeo;
+
+import java.util.function.Supplier;
 
 public class PlatformHelperImpl {
-    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, FarmAndCharm.MOD_ID);
+    public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(FarmAndCharm.MOD_ID, Registries.MOB_EFFECT);
 
     public static boolean isBonemealEffectEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_BONEMEAL_EFFECT.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_BONEMEAL_EFFECT);
     }
 
     public static int getWaterSprinklerRange() {
-        return FarmAndCharmForgeConfig.WATER_SPRINKLER_RANGE.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.WATER_SPRINKLER_RANGE);
     }
 
     public static boolean isRainGrowthEffectEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_RAIN_GROWTH_EFFECT.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_RAIN_GROWTH_EFFECT);
     }
 
     public static float getRainGrowthMultiplier() {
-        return FarmAndCharmForgeConfig.RAIN_GROWTH_MULTIPLIER.get().floatValue();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.RAIN_GROWTH_MULTIPLIER).floatValue();
     }
 
     public static int getFeedingTroughRange() {
-        return FarmAndCharmForgeConfig.FEEDING_TROUGH_RANGE.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FEEDING_TROUGH_RANGE);
     }
 
     public static int getFertilizedSoilRange() {
-        return FarmAndCharmForgeConfig.FERTILIZED_SOIL_RANGE.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FERTILIZED_SOIL_RANGE);
     }
 
     public static int getNutrition(String itemName) {
         return switch (itemName) {
-            case "oat_pancake" -> FarmAndCharmForgeConfig.OAT_PANCAKE_NUTRITION.get();
-            case "roasted_corn" -> FarmAndCharmForgeConfig.ROASTED_CORN_NUTRITION.get();
-            case "potato_with_roast_meat" -> FarmAndCharmForgeConfig.POTATO_WITH_ROAST_MEAT_NUTRITION.get();
-            case "baked_lamb_ham" -> FarmAndCharmForgeConfig.BAKED_LAMB_HAM_NUTRITION.get();
-            case "farmers_breakfast" -> FarmAndCharmForgeConfig.FARMERS_BREAKFAST_NUTRITION.get();
-            case "stuffed_chicken" -> FarmAndCharmForgeConfig.STUFFED_CHICKEN_NUTRITION.get();
-            case "stuffed_rabbit" -> FarmAndCharmForgeConfig.STUFFED_RABBIT_NUTRITION.get();
-            case "grandmothers_strawberry_cake" -> FarmAndCharmForgeConfig.GRANDMOTHERS_STRAWBERRY_CAKE_NUTRITION.get();
-            case "farmers_bread" -> FarmAndCharmForgeConfig.FARMERS_BREAD_NUTRITION.get();
-            case "farmer_salad" -> FarmAndCharmForgeConfig.FARMER_SALAD_NUTRITION.get();
-            case "goulash" -> FarmAndCharmForgeConfig.GOULASH_NUTRITION.get();
-            case "simple_tomato_soup" -> FarmAndCharmForgeConfig.SIMPLE_TOMATO_SOUP_NUTRITION.get();
-            case "barley_soup" -> FarmAndCharmForgeConfig.BARLEY_SOUP_NUTRITION.get();
-            case "onion_soup" -> FarmAndCharmForgeConfig.ONION_SOUP_NUTRITION.get();
-            case "potato_soup" -> FarmAndCharmForgeConfig.POTATO_SOUP_NUTRITION.get();
-            case "pasta_with_onion_sauce" -> FarmAndCharmForgeConfig.PASTA_WITH_ONION_SAUCE_NUTRITION.get();
-            case "corn_grits" -> FarmAndCharmForgeConfig.CORN_GRITS_NUTRITION.get();
-            case "oatmeal_with_strawberries" -> FarmAndCharmForgeConfig.OATMEAL_WITH_STRAWBERRIES_NUTRITION.get();
-            case "sausage_with_oat_patty" -> FarmAndCharmForgeConfig.SAUSAGE_WITH_OAT_PATTY_NUTRITION.get();
-            case "lamb_with_corn" -> FarmAndCharmForgeConfig.LAMB_WITH_CORN_NUTRITION.get();
-            case "beef_patty_with_vegetables" -> FarmAndCharmForgeConfig.BEEF_PATTY_WITH_VEGETABLES_NUTRITION.get();
-            case "barley_patties_with_potatoes" -> FarmAndCharmForgeConfig.BARLEY_PATTIES_WITH_POTATOES_NUTRITION.get();
-            case "bacon_with_eggs" -> FarmAndCharmForgeConfig.BACON_WITH_EGGS_NUTRITION.get();
-            case "chicken_wrapped_in_bacon" -> FarmAndCharmForgeConfig.CHICKEN_WRAPPED_IN_BACON_NUTRITION.get();
-            case "cooked_salmon" -> FarmAndCharmForgeConfig.COOKED_SALMON_NUTRITION.get();
-            case "cooked_cod" -> FarmAndCharmForgeConfig.COOKED_COD_NUTRITION.get();
-            case "roasted_chicken" -> FarmAndCharmForgeConfig.ROASTED_CHICKEN_NUTRITION.get();
+            case "oat_pancake" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.OAT_PANCAKE_NUTRITION);
+            case "roasted_corn" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ROASTED_CORN_NUTRITION);
+            case "potato_with_roast_meat" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.POTATO_WITH_ROAST_MEAT_NUTRITION);
+            case "baked_lamb_ham" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BAKED_LAMB_HAM_NUTRITION);
+            case "farmers_breakfast" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FARMERS_BREAKFAST_NUTRITION);
+            case "stuffed_chicken" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.STUFFED_CHICKEN_NUTRITION);
+            case "stuffed_rabbit" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.STUFFED_RABBIT_NUTRITION);
+            case "grandmothers_strawberry_cake" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.GRANDMOTHERS_STRAWBERRY_CAKE_NUTRITION);
+            case "farmers_bread" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FARMERS_BREAD_NUTRITION);
+            case "farmer_salad" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FARMER_SALAD_NUTRITION);
+            case "goulash" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.GOULASH_NUTRITION);
+            case "simple_tomato_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SIMPLE_TOMATO_SOUP_NUTRITION);
+            case "barley_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BARLEY_SOUP_NUTRITION);
+            case "onion_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ONION_SOUP_NUTRITION);
+            case "potato_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.POTATO_SOUP_NUTRITION);
+            case "pasta_with_onion_sauce" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.PASTA_WITH_ONION_SAUCE_NUTRITION);
+            case "corn_grits" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CORN_GRITS_NUTRITION);
+            case "oatmeal_with_strawberries" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.OATMEAL_WITH_STRAWBERRIES_NUTRITION);
+            case "sausage_with_oat_patty" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SAUSAGE_WITH_OAT_PATTY_NUTRITION);
+            case "lamb_with_corn" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.LAMB_WITH_CORN_NUTRITION);
+            case "beef_patty_with_vegetables" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BEEF_PATTY_WITH_VEGETABLES_NUTRITION);
+            case "barley_patties_with_potatoes" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BARLEY_PATTIES_WITH_POTATOES_NUTRITION);
+            case "bacon_with_eggs" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BACON_WITH_EGGS_NUTRITION);
+            case "chicken_wrapped_in_bacon" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CHICKEN_WRAPPED_IN_BACON_NUTRITION);
+            case "cooked_salmon" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.COOKED_SALMON_NUTRITION);
+            case "cooked_cod" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.COOKED_COD_NUTRITION);
+            case "roasted_chicken" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ROASTED_CHICKEN_NUTRITION);
             default -> 0;
         };
     }
 
     public static float getSaturationMod(String itemName) {
         return switch (itemName) {
-            case "oat_pancake" -> FarmAndCharmForgeConfig.OAT_PANCAKE_SATURATION_MOD.get().floatValue();
-            case "roasted_corn" -> FarmAndCharmForgeConfig.ROASTED_CORN_SATURATION_MOD.get().floatValue();
-            case "potato_with_roast_meat" -> FarmAndCharmForgeConfig.POTATO_WITH_ROAST_MEAT_SATURATION_MOD.get().floatValue();
-            case "baked_lamb_ham" -> FarmAndCharmForgeConfig.BAKED_LAMB_HAM_SATURATION_MOD.get().floatValue();
-            case "farmers_breakfast" -> FarmAndCharmForgeConfig.FARMERS_BREAKFAST_SATURATION_MOD.get().floatValue();
-            case "stuffed_chicken" -> FarmAndCharmForgeConfig.STUFFED_CHICKEN_SATURATION_MOD.get().floatValue();
-            case "stuffed_rabbit" -> FarmAndCharmForgeConfig.STUFFED_RABBIT_SATURATION_MOD.get().floatValue();
-            case "grandmothers_strawberry_cake" -> FarmAndCharmForgeConfig.GRANDMOTHERS_STRAWBERRY_CAKE_SATURATION_MOD.get().floatValue();
-            case "farmers_bread" -> FarmAndCharmForgeConfig.FARMERS_BREAD_SATURATION_MOD.get().floatValue();
-            case "farmer_salad" -> FarmAndCharmForgeConfig.FARMER_SALAD_SATURATION_MOD.get().floatValue();
-            case "goulash" -> FarmAndCharmForgeConfig.GOULASH_SATURATION_MOD.get().floatValue();
-            case "simple_tomato_soup" -> FarmAndCharmForgeConfig.SIMPLE_TOMATO_SOUP_SATURATION_MOD.get().floatValue();
-            case "barley_soup" -> FarmAndCharmForgeConfig.BARLEY_SOUP_SATURATION_MOD.get().floatValue();
-            case "onion_soup" -> FarmAndCharmForgeConfig.ONION_SOUP_SATURATION_MOD.get().floatValue();
-            case "potato_soup" -> FarmAndCharmForgeConfig.POTATO_SOUP_SATURATION_MOD.get().floatValue();
-            case "pasta_with_onion_sauce" -> FarmAndCharmForgeConfig.PASTA_WITH_ONION_SAUCE_SATURATION_MOD.get().floatValue();
-            case "corn_grits" -> FarmAndCharmForgeConfig.CORN_GRITS_SATURATION_MOD.get().floatValue();
-            case "oatmeal_with_strawberries" -> FarmAndCharmForgeConfig.OATMEAL_WITH_STRAWBERRIES_SATURATION_MOD.get().floatValue();
-            case "sausage_with_oat_patty" -> FarmAndCharmForgeConfig.SAUSAGE_WITH_OAT_PATTY_SATURATION_MOD.get().floatValue();
-            case "lamb_with_corn" -> FarmAndCharmForgeConfig.LAMB_WITH_CORN_SATURATION_MOD.get().floatValue();
-            case "beef_patty_with_vegetables" -> FarmAndCharmForgeConfig.BEEF_PATTY_WITH_VEGETABLES_SATURATION_MOD.get().floatValue();
-            case "barley_patties_with_potatoes" -> FarmAndCharmForgeConfig.BARLEY_PATTIES_WITH_POTATOES_SATURATION_MOD.get().floatValue();
-            case "bacon_with_eggs" -> FarmAndCharmForgeConfig.BACON_WITH_EGGS_SATURATION_MOD.get().floatValue();
-            case "chicken_wrapped_in_bacon" -> FarmAndCharmForgeConfig.CHICKEN_WRAPPED_IN_BACON_SATURATION_MOD.get().floatValue();
-            case "cooked_salmon" -> FarmAndCharmForgeConfig.COOKED_SALMON_SATURATION_MOD.get().floatValue();
-            case "cooked_cod" -> FarmAndCharmForgeConfig.COOKED_COD_SATURATION_MOD.get().floatValue();
-            case "roasted_chicken" -> FarmAndCharmForgeConfig.ROASTED_CHICKEN_SATURATION_MOD.get().floatValue();
+            case "oat_pancake" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.OAT_PANCAKE_SATURATION_MOD).floatValue();
+            case "roasted_corn" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ROASTED_CORN_SATURATION_MOD).floatValue();
+            case "potato_with_roast_meat" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.POTATO_WITH_ROAST_MEAT_SATURATION_MOD).floatValue();
+            case "baked_lamb_ham" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BAKED_LAMB_HAM_SATURATION_MOD).floatValue();
+            case "farmers_breakfast" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FARMERS_BREAKFAST_SATURATION_MOD).floatValue();
+            case "stuffed_chicken" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.STUFFED_CHICKEN_SATURATION_MOD).floatValue();
+            case "stuffed_rabbit" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.STUFFED_RABBIT_SATURATION_MOD).floatValue();
+            case "grandmothers_strawberry_cake" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.GRANDMOTHERS_STRAWBERRY_CAKE_SATURATION_MOD).floatValue();
+            case "farmers_bread" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FARMERS_BREAD_SATURATION_MOD).floatValue();
+            case "farmer_salad" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FARMER_SALAD_SATURATION_MOD).floatValue();
+            case "goulash" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.GOULASH_SATURATION_MOD).floatValue();
+            case "simple_tomato_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SIMPLE_TOMATO_SOUP_SATURATION_MOD).floatValue();
+            case "barley_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BARLEY_SOUP_SATURATION_MOD).floatValue();
+            case "onion_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ONION_SOUP_SATURATION_MOD).floatValue();
+            case "potato_soup" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.POTATO_SOUP_SATURATION_MOD).floatValue();
+            case "pasta_with_onion_sauce" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.PASTA_WITH_ONION_SAUCE_SATURATION_MOD).floatValue();
+            case "corn_grits" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CORN_GRITS_SATURATION_MOD).floatValue();
+            case "oatmeal_with_strawberries" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.OATMEAL_WITH_STRAWBERRIES_SATURATION_MOD).floatValue();
+            case "sausage_with_oat_patty" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SAUSAGE_WITH_OAT_PATTY_SATURATION_MOD).floatValue();
+            case "lamb_with_corn" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.LAMB_WITH_CORN_SATURATION_MOD).floatValue();
+            case "beef_patty_with_vegetables" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BEEF_PATTY_WITH_VEGETABLES_SATURATION_MOD).floatValue();
+            case "barley_patties_with_potatoes" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BARLEY_PATTIES_WITH_POTATOES_SATURATION_MOD).floatValue();
+            case "bacon_with_eggs" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.BACON_WITH_EGGS_SATURATION_MOD).floatValue();
+            case "chicken_wrapped_in_bacon" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CHICKEN_WRAPPED_IN_BACON_SATURATION_MOD).floatValue();
+            case "cooked_salmon" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.COOKED_SALMON_SATURATION_MOD).floatValue();
+            case "cooked_cod" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.COOKED_COD_SATURATION_MOD).floatValue();
+            case "roasted_chicken" -> FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ROASTED_CHICKEN_SATURATION_MOD).floatValue();
             default -> 0.0f;
         };
     }
 
     public static boolean isTamingEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_TAMING.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_TAMING);
     }
 
     public static boolean isHorseTamingEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_HORSE_TAMING.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_HORSE_TAMING);
     }
 
     public static boolean isHorseEffectsEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_HORSE_EFFECTS.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_HORSE_EFFECTS);
     }
 
     public static boolean isChickenEffectsEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_CHICKEN_EFFECTS.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_CHICKEN_EFFECTS);
     }
 
     public static boolean enableCatTamingChance() {
-        return FarmAndCharmForgeConfig.ENABLE_CAT_TAMING_CHANCE.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_CAT_TAMING_CHANCE);
     }
 
     public static boolean isFertilizerEnabled() {
-        return FarmAndCharmForgeConfig.ENABLE_FERTILIZER.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.ENABLE_FERTILIZER);
     }
 
     public static int getChickenEffectTickInterval() {
-        return FarmAndCharmForgeConfig.CHICKEN_EFFECT_TICK_INTERVAL.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CHICKEN_EFFECT_TICK_INTERVAL);
     }
 
     public static int getChickenEffectEggChance() {
-        return FarmAndCharmForgeConfig.CHICKEN_EFFECT_EGG_CHANCE.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CHICKEN_EFFECT_EGG_CHANCE);
     }
 
     public static int getChickenEffectFeatherChance() {
-        return FarmAndCharmForgeConfig.CHICKEN_EFFECT_FEATHER_CHANCE.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.CHICKEN_EFFECT_FEATHER_CHANCE);
     }
 
     public static int getFeastEffectSatiationInterval() {
-        return FarmAndCharmForgeConfig.FEAST_EFFECT_SATIATION_INTERVAL.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FEAST_EFFECT_SATIATION_INTERVAL);
     }
 
     public static int getFeastEffectSustenanceInterval() {
-        return FarmAndCharmForgeConfig.FEAST_EFFECT_SUSTENANCE_INTERVAL.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FEAST_EFFECT_SUSTENANCE_INTERVAL);
     }
 
     public static int getFeastEffectHealAmount() {
-        return FarmAndCharmForgeConfig.FEAST_EFFECT_HEAL_AMOUNT.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.FEAST_EFFECT_HEAL_AMOUNT);
     }
 
     public static int getSustenanceEffectInterval() {
-        return FarmAndCharmForgeConfig.SUSTENANCE_EFFECT_INTERVAL.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SUSTENANCE_EFFECT_INTERVAL);
     }
 
     public static int getSustenanceEffectHealAmount() {
-        return FarmAndCharmForgeConfig.SUSTENANCE_EFFECT_HEAL_AMOUNT.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SUSTENANCE_EFFECT_HEAL_AMOUNT);
     }
 
     public static int getSustenanceEffectFoodIncrement() {
-        return FarmAndCharmForgeConfig.SUSTENANCE_EFFECT_FOOD_INCREMENT.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SUSTENANCE_EFFECT_FOOD_INCREMENT);
     }
 
     public static int getSatiationEffectInterval() {
-        return FarmAndCharmForgeConfig.SATIATION_EFFECT_INTERVAL.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SATIATION_EFFECT_INTERVAL);
     }
 
     public static int getSatiationEffectHealAmount() {
-        return FarmAndCharmForgeConfig.SATIATION_EFFECT_HEAL_AMOUNT.get();
+        return FarmAndCharmConfigNeo.orDefault(FarmAndCharmConfigNeo.SATIATION_EFFECT_HEAL_AMOUNT);
     }
-
 
     public static Holder<MobEffect> registerEffect(String name, Supplier<MobEffect> effect) {
         return MOB_EFFECTS.register(name, effect);
