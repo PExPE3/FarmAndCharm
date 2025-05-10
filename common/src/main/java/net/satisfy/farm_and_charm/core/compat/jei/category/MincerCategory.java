@@ -13,18 +13,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.core.recipe.MincerRecipe;
 import net.satisfy.farm_and_charm.core.registry.ObjectRegistry;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class MincerCategory implements IRecipeCategory<MincerRecipe> {
     public static final RecipeType<MincerRecipe> MINCING_TYPE = RecipeType.create(FarmAndCharm.MOD_ID, "mincer", MincerRecipe.class);
-    public final static ResourceLocation TEXTURE = FarmAndCharmIdentifier.of("textures/gui/mincer.png");
+    public final static ResourceLocation TEXTURE = FarmAndCharm.id("textures/gui/mincer.png");
 
     private final IDrawable background;
     private final IDrawable icon;

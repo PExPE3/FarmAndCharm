@@ -7,13 +7,11 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.satisfy.farm_and_charm.FarmAndCharm;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 
 public class WaterSprinklerModel<T extends Entity> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(FarmAndCharmIdentifier.of("water_sprinkler"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(FarmAndCharm.id("water_sprinkler"), "main");
     private final ModelPart rotating;
     private final ModelPart basin;
 

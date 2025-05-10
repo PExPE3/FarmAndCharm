@@ -1,21 +1,12 @@
 package net.satisfy.farm_and_charm.core.registry;
 
 import dev.architectury.registry.registries.DeferredRegister;
-import dev.architectury.registry.registries.DeferredSupplier;
-import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.core.effect.*;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
-import net.satisfy.farm_and_charm.platform.PlatformHelper;
 
 import java.util.function.Supplier;
 
@@ -35,7 +26,7 @@ public class MobEffectRegistry {
     public static final RegistrySupplier<MobEffect> FEAST = registerEffect("feast", FeastEffect::new);
 
     private static RegistrySupplier<MobEffect> registerEffect(final String path, final Supplier<? extends MobEffect> type) {
-        return MOB_EFFECTS.register(FarmAndCharmIdentifier.of(path), type);
+        return MOB_EFFECTS.register(FarmAndCharm.id(path), type);
     }
 
     public static Holder<MobEffect> getReference(RegistrySupplier<MobEffect> input) {

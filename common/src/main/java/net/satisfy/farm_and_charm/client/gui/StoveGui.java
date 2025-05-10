@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.client.gui.handler.StoveGuiHandler;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 
 @Environment(EnvType.CLIENT)
 public class StoveGui extends AbstractContainerScreen<StoveGuiHandler> {
@@ -29,7 +29,7 @@ public class StoveGui extends AbstractContainerScreen<StoveGuiHandler> {
     }
 
     static {
-        BACKGROUND = FarmAndCharmIdentifier.of("textures/gui/stove_gui.png");
+        BACKGROUND = FarmAndCharm.id("textures/gui/stove_gui.png");
     }
 
     @Override

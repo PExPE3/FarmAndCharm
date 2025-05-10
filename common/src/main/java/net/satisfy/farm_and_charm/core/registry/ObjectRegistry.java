@@ -22,7 +22,6 @@ import net.satisfy.farm_and_charm.core.item.*;
 import net.satisfy.farm_and_charm.core.item.food.EffectBlockItem;
 import net.satisfy.farm_and_charm.core.item.food.EffectItem;
 import net.satisfy.farm_and_charm.core.item.food.EffectJugItem;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 import net.satisfy.farm_and_charm.core.util.GeneralUtil;
 import net.satisfy.farm_and_charm.platform.PlatformHelper;
 
@@ -218,14 +217,14 @@ public class ObjectRegistry {
     }
 
     public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
-        return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, FarmAndCharmIdentifier.of(name), block);
+        return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, FarmAndCharm.id(name), block);
     }
 
     public static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
-        return GeneralUtil.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, FarmAndCharmIdentifier.of(path), block);
+        return GeneralUtil.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, FarmAndCharm.id(path), block);
     }
 
     public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
-        return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, FarmAndCharmIdentifier.of(path), itemSupplier);
+        return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, FarmAndCharm.id(path), itemSupplier);
     }
 }

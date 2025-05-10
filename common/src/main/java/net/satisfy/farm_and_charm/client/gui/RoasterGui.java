@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.client.gui.handler.RoasterGuiHandler;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 
 @Environment(EnvType.CLIENT)
 public class RoasterGui extends AbstractContainerScreen<RoasterGuiHandler> {
@@ -20,7 +20,7 @@ public class RoasterGui extends AbstractContainerScreen<RoasterGuiHandler> {
     public static final int ARROW_Y = 14;
 
     static {
-        BACKGROUND = FarmAndCharmIdentifier.of("textures/gui/pot_gui.png");
+        BACKGROUND = FarmAndCharm.id("textures/gui/pot_gui.png");
     }
 
     public RoasterGui(RoasterGuiHandler handler, Inventory playerInventory, Component title) {

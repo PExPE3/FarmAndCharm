@@ -5,7 +5,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 import net.satisfy.farm_and_charm.fabric.core.config.FarmAndCharmConfigFabric;
 import net.satisfy.farm_and_charm.platform.PlatformHelper;
 
@@ -196,6 +195,6 @@ public class PlatformHelperImpl extends PlatformHelper {
     }
 
     public static Holder<MobEffect> registerEffect(String name, Supplier<MobEffect> effect) {
-        return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, FarmAndCharmIdentifier.of(name), effect.get());
+        return Registry.registerForHolder(BuiltInRegistries.MOB_EFFECT, FarmAndCharm.id(name), effect.get());
     }
 }

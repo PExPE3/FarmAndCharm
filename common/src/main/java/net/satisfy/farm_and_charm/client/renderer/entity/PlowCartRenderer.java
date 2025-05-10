@@ -7,13 +7,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.satisfy.farm_and_charm.FarmAndCharm;
 import net.satisfy.farm_and_charm.client.model.PlowCartModel;
 import net.satisfy.farm_and_charm.core.entity.PlowCartEntity;
-import net.satisfy.farm_and_charm.core.util.FarmAndCharmIdentifier;
 import org.jetbrains.annotations.NotNull;
 
 public class PlowCartRenderer extends EntityRenderer<PlowCartEntity> {
-    private static final ResourceLocation CART_TEXTURE = FarmAndCharmIdentifier.of("textures/entity/supply_cart.png");
+    private static final ResourceLocation CART_TEXTURE = FarmAndCharm.id("textures/entity/supply_cart.png");
     private final PlowCartModel<PlowCartEntity> model;
 
     public PlowCartRenderer(EntityRendererProvider.Context context) {
