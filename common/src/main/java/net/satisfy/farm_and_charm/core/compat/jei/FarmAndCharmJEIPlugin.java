@@ -25,9 +25,9 @@ import net.satisfy.farm_and_charm.core.registry.RecipeTypeRegistry;
 import net.satisfy.farm_and_charm.core.registry.ScreenhandlerTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 @JeiPlugin
@@ -51,46 +51,28 @@ public class FarmAndCharmJEIPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-        List<RecipeHolder<CookingPotRecipe>> cookingHoldersRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.COOKING_POT_RECIPE_TYPE.get());
-        List<CookingPotRecipe> cookingPotRecipes = new ArrayList<>();
-        cookingHoldersRecipes.iterator().forEachRemaining(recipeHolder -> {
-            cookingPotRecipes.add(recipeHolder.value());
-        });
+        List<CookingPotRecipe> cookingPotRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.COOKING_POT_RECIPE_TYPE.get())
+                .stream().map(RecipeHolder::value).collect(Collectors.toList());
         registration.addRecipes(CookingPotCategory.COOKING_POT, cookingPotRecipes);
 
-        List<RecipeHolder<StoveRecipe>> stoveHolderRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.STOVE_RECIPE_TYPE.get());
-        List<StoveRecipe> stoveRecipes = new ArrayList<>();
-        stoveHolderRecipes.iterator().forEachRemaining(recipeHolder -> {
-            stoveRecipes.add(recipeHolder.value());
-        });
+        List<StoveRecipe> stoveRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.STOVE_RECIPE_TYPE.get())
+                .stream().map(RecipeHolder::value).collect(Collectors.toList());
         registration.addRecipes(StoveCategory.STOVE, stoveRecipes);
 
-        List<RecipeHolder<CraftingBowlRecipe>> doughingHolderRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.CRAFTING_BOWL_RECIPE_TYPE.get());
-        List<CraftingBowlRecipe> doughingRecipes = new ArrayList<>();
-        doughingHolderRecipes.iterator().forEachRemaining(recipeHolder -> {
-            doughingRecipes.add(recipeHolder.value());
-        });
+        List<CraftingBowlRecipe> doughingRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.CRAFTING_BOWL_RECIPE_TYPE.get())
+                .stream().map(RecipeHolder::value).collect(Collectors.toList());
         registration.addRecipes(CraftingBowlCategory.DOUGHING, doughingRecipes);
 
-        List<RecipeHolder<RoasterRecipe>> roasterHolderRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.ROASTER_RECIPE_TYPE.get());
-        List<RoasterRecipe> roasterRecipes = new ArrayList<>();
-        roasterHolderRecipes.iterator().forEachRemaining(recipeHolder -> {
-            roasterRecipes.add(recipeHolder.value());
-        });
+        List<RoasterRecipe> roasterRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.ROASTER_RECIPE_TYPE.get())
+                .stream().map(RecipeHolder::value).toList();
         registration.addRecipes(RoasterCategory.ROASTER, roasterRecipes);
 
-        List<RecipeHolder<SiloRecipe>> siloHolderRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.SILO_RECIPE_TYPE.get());
-        List<SiloRecipe> siloRecipes = new ArrayList<>();
-        siloHolderRecipes.iterator().forEachRemaining(recipeHolder -> {
-            siloRecipes.add(recipeHolder.value());
-        });
+        List<SiloRecipe> siloRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.SILO_RECIPE_TYPE.get())
+                .stream().map(RecipeHolder::value).toList();
         registration.addRecipes(SiloCategory.DRYING_TYPE, siloRecipes);
 
-        List<RecipeHolder<MincerRecipe>> mincerHolderRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.MINCER_RECIPE_TYPE.get());
-        List<MincerRecipe> mincerRecipes = new ArrayList<>();
-        mincerHolderRecipes.iterator().forEachRemaining(recipeHolder -> {
-            mincerRecipes.add(recipeHolder.value());
-        });
+        List<MincerRecipe> mincerRecipes = rm.getAllRecipesFor(RecipeTypeRegistry.MINCER_RECIPE_TYPE.get())
+                .stream().map(RecipeHolder::value).collect(Collectors.toList());
         registration.addRecipes(MincerCategory.MINCING_TYPE, mincerRecipes);
     }
 

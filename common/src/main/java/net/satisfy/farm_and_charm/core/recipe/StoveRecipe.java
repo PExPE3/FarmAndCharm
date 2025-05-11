@@ -103,42 +103,6 @@ public class StoveRecipe implements Recipe<RecipeInput> {
         public @NotNull StreamCodec<RegistryFriendlyByteBuf, StoveRecipe> streamCodec() {
             return ByteBufCodecs.fromCodecWithRegistries(codec().codec());
         }
-
-
-        /*@Override
-        public @NotNull StoveRecipe fromJson(ResourceLocation id, JsonObject json) {
-            final var ingredients = GeneralUtil.deserializeIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
-            if (ingredients.isEmpty()) {
-                throw new JsonParseException("No ingredients for Stove Recipe");
-            } else if (ingredients.size() > 3) {
-                throw new JsonParseException("Too many ingredients for Stove Recipe");
-            } else {
-                boolean requiresLearning = GsonHelper.getAsBoolean(json, "requiresLearning", false);
-                return new StoveRecipe(id, ingredients,
-                        ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result")),
-                        GsonHelper.getAsFloat(json, "experience", 0.0F),
-                        requiresLearning
-                );
-            }
-        }
-
-        @Override
-        public @NotNull StoveRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            final var ingredients = NonNullList.withSize(buf.readVarInt(), Ingredient.EMPTY);
-            ingredients.replaceAll(ignored -> Ingredient.fromNetwork(buf));
-            ItemStack output = buf.readItem();
-            float xp = buf.readFloat();
-            boolean requiresLearning = buf.readBoolean();
-            return new StoveRecipe(id, ingredients, output, xp, requiresLearning);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf buf, StoveRecipe recipe) {
-            buf.writeVarInt(recipe.inputs.size());
-            recipe.inputs.forEach(entry -> entry.toNetwork(buf));
-            buf.writeItem(recipe.output);
-            buf.writeFloat(recipe.experience);
-            buf.writeBoolean(recipe.requiresLearning);
-        }*/
+        
     }
 }
